@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ביטוח - אתר דוגמא</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="responsive.css">
+    <style>
+        /* עיצוב עבור הכפתור המותאם אישית */
+        .custom-file-upload {
+            border: 2px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+
+
+        /* מיון כל התפריטים ואפשרויות הבחירה שלהם לימין */
+        .right-align {
+            text-align: right;
+        }
+
+        /* הסתרת תיבת בחירת הקובץ של הדפדפן */
+        #fileUpload {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>ברוכים הבאים לאתר הביטוח שלנו</h1>
+    <form>
+        <div class="right-align">
+            <label for="username">:משתמש</label>
+            <select id="username" name="username">
+                <option  style="direction: rtl;"></option>
+                <option value="user1" style="direction: rtl;">משתמש 1</option>
+                <option value="user2" style="direction: rtl;">משתמש 2</option>
+                <!-- ניתן להוסיף עוד אפשרויות כרצונך -->
+            </select>
+        </div>
+
+        <br>
+
+        <div class="right-align">
+            <label for="process">:סוג תהליך</label>
+            <select id="process" name="process">
+                <option  style="direction: rtl;"></option>
+                <option value="process1" style="direction: rtl;">תהליך 1</option>
+                <option value="process2" style="direction: rtl;">תהליך 2</option>
+                <!-- ניתן להוסיף עוד אפשרויות כרצונך -->
+            </select>
+        </div>
+
+        <!-- השתמש בתווית label עם המאפיין "for" כדי להפעיל את תיבת הבחירה של הקובץ -->
+        <label class="custom-file-upload" for="fileUpload">בחר קובץ</label>
+        <!-- הסתרת תיבת בחירת הקובץ הקיימת -->
+        <input type="file" id="fileUpload" name="fileUpload">
+
+        <!-- הצגת שם הקובץ שנבחר -->
+        <span id="fileLabel">לא נבחר קובץ</span>
+        <br>
+
+        <!-- כפתור "שלח קובץ" -->
+        <button type="button" id="buttonSendFile"class="buttonSendFile" onclick="sendFile()">שלח קובץ</button>
+    </form>
+
+    <script>
+        // בעת בחירת קובץ, עדכן את תוכן התווית של fileLabel
+        document.getElementById('fileUpload').addEventListener('change', function() {
+            var fileLabel = document.getElementById('fileLabel');
+            var fileUpload = document.getElementById('fileUpload');
+            fileLabel.innerHTML = fileUpload.value.split(/(\\|\/)/g).pop(); // הצגת שם הקובץ בלבד ללא הנתיב המלא
+        });
+
+        // פונקציה לשליחת קובץ ל-Orchestrator
+        function sendFile() {
+            var selectedUsername = document.getElementById('username').value;
+            var selectedProcess = document.getElementById('process').value;
+            var selectedFile = document.getElementById('fileUpload').value.split(/(\\|\/)/g).pop();
+
+            var queueItemData = {
+                "username": "שם משתמש: " + selectedUsername,
+                "process": selectedProcess,
+                "file": selectedFile
+            };
+
+            var requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(queueItemData)
+            };
+
+            fetch('https://your_orchestrator_url/odata/Queues/YourQueueName/UiPathODataSvc.AddQueueItem', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Queue Item was created successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error creating Queue Item:', error);
+                });
+        }
+    </script>
+</body>
+</html>

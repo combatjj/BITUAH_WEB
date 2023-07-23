@@ -1,0 +1,101 @@
+/* עיצוב גופו של הדף */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 0;
+}
+
+/* עיצוב הכותרת הראשית */
+h1 {
+    text-align: center;
+    color: #007bff;
+}
+
+/* עיצוב הטופס */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* עיצוב התוויות לשדות הטופס */
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* עיצוב שדות ה-Select בטופס */
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+        /* עיצוב עבור הכפתור המותאם אישית */
+        .custom-file-upload {
+            border: 2px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+
+/* עיצוב כפתור ההעלאה */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+  #buttonSendFile {
+    border: 2px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* עיצוב שדת העלאת הקובץ */
+input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* עיצוב ההודעה למעלה מהכפתור */
+.message {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* עיצוב הודעות על שגיאות */
+.error {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
